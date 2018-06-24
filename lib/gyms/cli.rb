@@ -31,21 +31,29 @@ class Gyms::CLI
     # doc (minus zip in URL): http://www.gymsandfitnessclubs.com/gyms-by-location/results.php?postal_code=94582
     zip = get_zip
     @gyms = Gyms::Gym.local
-    binding.pry
-
+    list
     puts "Enter gym number to get more details: "
     input = gets.strip
 
-    while input > 0 && input < 11
-      case input
-      when "1"
-        puts "More info on gym #1..."
-      when "2"
-        puts "More info on gym #2..."
-      else
-        puts "Invalid entry. Try again."
-        menu
-      end
+    if input.to_i > 0 && input.to_i < 11
+      puts ""
+      puts @gyms[input.to_i - 1].name
+      puts @gyms[input.to_i - 1].address
+      puts @gyms[input.to_i - 1].phone
+    end
+
+    if input == "list"
+      list
+    else
+      puts "Invalid entry. Try again."
+      menu
+    end
+
+  end
+
+  def list
+    @gyms.each.with_index(1) do |gym, i|
+      puts "#{i}. #{gym.name}"
     end
   end
 
