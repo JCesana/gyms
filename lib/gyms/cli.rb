@@ -1,6 +1,5 @@
 require 'pry'
 class Gyms::CLI
-
   attr_accessor :zip
 
   def call
@@ -82,7 +81,7 @@ class Gyms::CLI
   def goodbye
     puts ""
     puts "Enjoy your workout!"
-    puts "" 
+    puts ""
     exit
   end
 end

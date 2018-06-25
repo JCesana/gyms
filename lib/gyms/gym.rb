@@ -5,6 +5,7 @@ class Gyms::Gym
     puts ""
     puts "Finding your gyms..."
     puts ""
+
     main_url = "http://www.gymsandfitnessclubs.com"
     http = "http://www.gymsandfitnessclubs.com/gyms-by-location/results.php?postal_code=#{zip}"
     doc = Nokogiri::HTML(open(http))
