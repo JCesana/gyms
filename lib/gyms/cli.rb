@@ -46,7 +46,7 @@ class Gyms::CLI
   end
 
   def get_detail_input
-    puts "Enter gym number to get more details: "
+    puts "Type number for gym details or type exit:"
     input = gets.strip
     if input.to_i < 0 || input.to_i > 8
       puts "Invalid entry. Try again:"
