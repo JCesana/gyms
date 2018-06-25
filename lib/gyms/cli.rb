@@ -29,8 +29,8 @@ class Gyms::CLI
 
   def menu
     # doc (minus zip in URL): http://www.gymsandfitnessclubs.com/gyms-by-location/results.php?postal_code=94582
-    zip = get_zip
-    @gyms = Gyms::Gym.local
+    @zip = get_zip
+    @gyms = Gyms::Gym.get_local_gyms
     list
     puts "Enter gym number to get more details: "
     input = gets.strip
