@@ -1,8 +1,12 @@
 require 'pry'
 class Gyms::CLI
 
+  attr_accessor :zip
+
   def call
     title
+    zip = get_zip
+    get_gyms(zip)
     menu
     goodbye
   end
@@ -11,6 +15,20 @@ class Gyms::CLI
     puts ""
     puts "Gym Locator"
     puts ""
+  end
+
+  def get_gyms(zip)
+    @gyms = Gyms::Gym.get_local_gyms(zip)
+  end
+
+  def menu
+    input = nil
+    list_gyms
+    while input != "exit"
+      input = get_detail_input
+      display_detail(input)
+    end
+
   end
 
   def get_zip
@@ -27,37 +45,32 @@ class Gyms::CLI
     string.scan(/\D/).empty?
   end
 
-  def menu
-    # doc (minus zip in URL): http://www.gymsandfitnessclubs.com/gyms-by-location/results.php?postal_code=94582
-    @gyms = Gyms::Gym.get_local_gyms(get_zip)
-    list
+  def get_detail_input
     puts "Enter gym number to get more details: "
     input = gets.strip
-
-    if input.to_i > 0 && input.to_i < 9
-      puts ""
-      puts @gyms[input.to_i - 1].name
-      puts @gyms[input.to_i - 1].address1
-      puts @gyms[input.to_i - 1].address2
-      puts @gyms[input.to_i - 1].phone
+    if input.to_i < 0 || input.to_i > 8
+      puts "Invalid entry. Try again:"
+      get_detail_input
     end
-
-    if input == "list"
-      list
-    else
-      puts "Invalid entry. Try again."
-      menu
-    end
-
+    input
   end
 
-  def list
+  def list_gyms
     @gyms.each.with_index(1) do |gym, i|
       puts "#{i}. #{gym.name}"
     end
   end
 
+  def display_detail(input)
+      puts ""
+      puts @gyms[input.to_i - 1].name
+      puts @gyms[input.to_i - 1].address1
+      puts @gyms[input.to_i - 1].address2
+      puts @gyms[input.to_i - 1].phone
+      puts ""
+  end
+
   def goodbye
-    "Thank you for using Gyms!"
+    puts "Enjoy your workout!"
   end
 end

@@ -2,19 +2,14 @@ class Gyms::Gym
   attr_accessor :name, :url, :address1, :address2, :phone
 
   def self.get_local_gyms(zip)
-    # I want to return a bunch of instances of gyms here (all local by input zip code)
-
-    self.scrape_gyms(zip)
-  end
-
-  def self.scrape_gyms(zip)
-    # Scrape http://www.gymsandfitnessclubs.com/gyms-by-location/results.php?postal_code=94582
-    # and return gyms based on scraped data
     main_url = "http://www.gymsandfitnessclubs.com"
     http = "http://www.gymsandfitnessclubs.com/gyms-by-location/results.php?postal_code=#{zip}"
     doc = Nokogiri::HTML(open(http))
-    binding.pry
 
+    if doc.search("#marquee_content").text.include?("Sorry")
+      puts "This is not a valid zip code."
+    end
+    
     gyms = []
 
     gym_1 = self.new
@@ -128,4 +123,5 @@ class Gyms::Gym
 
     gyms << gym_8
   end
+
 end

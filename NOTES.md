@@ -25,8 +25,4 @@ user picks number option to show name, address, phone of selected gym
 San Ramon, CA 94583-5415
 (925) 244-9855
 
-Commands:
-
-list - go back to previous list
-zip - enter new zip code
-exit - exit program -->
+user can continue to make number selections for detailed info
