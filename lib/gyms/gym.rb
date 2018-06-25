@@ -9,8 +9,12 @@ class Gyms::Gym
     http = "http://www.gymsandfitnessclubs.com/gyms-by-location/results.php?postal_code=#{zip}"
     doc = Nokogiri::HTML(open(http))
 
+    # Invalid zip code ("Sorry" is found on webpage when invalid zip code is entered by user)
     if doc.search("#marquee_content").text.include?("Sorry")
-      puts "This is not a valid zip code."
+      puts ""
+      puts "* * * Invalid zip code. Try again. * * * "
+      puts ""
+      Gyms::CLI.new.call
     end
 
     gyms = []
