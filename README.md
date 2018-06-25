@@ -4,23 +4,11 @@ Gyms will help you locate a nearby gym (using a zip code) and will display the g
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'gyms'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
     $ gem install gyms
 
 ## Usage
 
-    $ .bin/gyms
+    $ ./bin/gyms
 
 ## Development
 
