@@ -29,16 +29,16 @@ class Gyms::CLI
 
   def menu
     # doc (minus zip in URL): http://www.gymsandfitnessclubs.com/gyms-by-location/results.php?postal_code=94582
-    @zip = get_zip
-    @gyms = Gyms::Gym.get_local_gyms
+    @gyms = Gyms::Gym.get_local_gyms(get_zip)
     list
     puts "Enter gym number to get more details: "
     input = gets.strip
 
-    if input.to_i > 0 && input.to_i < 11
+    if input.to_i > 0 && input.to_i < 9
       puts ""
       puts @gyms[input.to_i - 1].name
-      puts @gyms[input.to_i - 1].address
+      puts @gyms[input.to_i - 1].address1
+      puts @gyms[input.to_i - 1].address2
       puts @gyms[input.to_i - 1].phone
     end
 
@@ -60,5 +60,4 @@ class Gyms::CLI
   def goodbye
     "Thank you for using Gyms!"
   end
-
 end
